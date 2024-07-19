@@ -1,3 +1,7 @@
+<?php 
+    include 'php/connection.php';
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,8 +29,6 @@
                 <a href="#"><i class="fa-regular fa-user"></i></a>
             </div>
         </div>
-
-          
     </div>
     
 <!-- Carousels Scroll -->
@@ -134,6 +136,7 @@
     </div>
     <br>
 
+
 <!-- products -->
     <div class="product-container">
         <div class="product">
@@ -146,125 +149,39 @@
 <!-- cards  -->
     <div class="product-list">
         <div class="product-item">
-
             <div class="container">
+ <!-- PUBG -->
+            <?php 
+            $select = "SELECT * FROM products";
+            $select_query = mysqli_query($conn, $select);
+
+            while ($row = $select_query->fetch_assoc()) {
+                $item = $row['item'];
+                $amount = $row['quantity'];
+                $price = $row['price'];
+                $card_img = $row['card_img'];
+                $cur_img = $row['cur_img'];
+            
+            ?>
                 <div class="card">
-                    <img src="Img/card-img.png">
+                    <img src="Img/<?php echo$card_img; ?>">
                     <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
+                        <p class="game"><i class="fa-solid fa-gamepad"></i><?php echo $item; ?></p>
                         <div class="uc-price">
                             <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
+                                <img src="Img/<?php echo $cur_img; ?>">
+                                <p><?php echo $amount; ?></p>
                             </div>
                             <div class="price">
-                                <p>Rs. <span>150</span></p>
+                                <p>रु. <span><?php echo $price; ?></span></p>
                             </div>
                         </div>
                     </div>
                     <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
                 </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
-                <div class="card">
-                    <img src="Img/card-img.png">
-                    <div class="details">
-                        <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG</p>
-                        <div class="uc-price">
-                            <div class="uc">
-                                <img src="Img/uc.png">
-                                <p>60</p>
-                            </div>
-                            <div class="price">
-                                <p>Rs. <span>150</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
-                </div>
+            <?php } ?>
                 
             </div>
-
-            
-
         </div>
     </div>
 
@@ -283,9 +200,9 @@
             <div class="footer-column">
                 <div class="footer-content">
                     <h3>Contact Info</h3>
-                    <p><i class="fa-solid fa-location-dot"></i> Ghorahi Dang, Nepal</p>
-                    <p><i class="fa-solid fa-envelope"></i> aprimr@gmail.com</p>
-                    <p><i class="fa-solid fa-phone"></i> +977 970-2640000</p>
+                    <p><i class="fa-solid fa-envelope"></i> safalacharya2059@gmail.com</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Bharatpur Chitwan, Nepal</p>
+                    <p><i class="fa-solid fa-phone"></i> +977 970-4989205</p>
                 </div>
             </div>
             <div class="footer-column">
@@ -293,7 +210,7 @@
                     <h3>Payment Via</h3>
                     <div class="payment-partners">
                         <img src="Img/payment/esewa.png">
-                        <img src="img/payment/khalti.png">
+                        <img src="Img/payment/khalti.png">
                         <img src="Img/payment/ime-pay.png">
                     </div>
                 </div>
@@ -309,7 +226,7 @@
                 <p>&copy; Gamer Store @ All rights reserved. </p>
             </div>
             <div class="footer-bottom">
-                <p>Made with <i class="fa-solid fa-heart"></i> by <a href="https://www.aprimregmi.com.np/index.html" target="_blank">aprimr.</a> </p>
+                <p>Made with  <i class="fa-solid fa-heart "></i>  by <a href="https://www.aprimregmi.com.np/index.html" target="_blank">aprimr.</a> </p>
             </div>
         </div>
 

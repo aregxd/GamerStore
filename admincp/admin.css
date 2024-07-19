@@ -1,0 +1,285 @@
+*{
+    text-decoration: none;
+}
+/* login page */
+.login-wrapper {
+    display: flex;
+}
+
+.login-page {
+    height: 100vh;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page .form-wrapper {
+    height: 70vh;
+    width: 90vmin;
+}
+
+.login-page .form-wrapper .logo {
+    display: flex;
+    justify-content: center;
+    background-color: #1C262F;
+    padding-top: 5px;
+    margin-bottom: 30px;
+}
+
+.login-page .form-wrapper .logo img {
+    height: 50px;
+    width: 50px;
+}
+
+.login-page .form-wrapper .logo p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #F5841A;
+}
+
+.login-page .form-wrapper .logo p span {
+    color: white;
+}
+
+.login-page .form-wrapper .logo p span .fa-solid {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.login-page .form-wrapper .logo p span text {
+    font-size: 18px;
+    color: #F5841A;
+}
+
+.login-page .form-wrapper .form {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid #1C262F;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form input[type="text"]:focus {
+    border-bottom: 2px solid #F5841A;
+}
+
+.form button {
+    width: 75%;
+    margin-top: 20px;
+    border-radius: 3px;
+    padding: 5px 30px;
+    border: none;
+    background-color: #F5841A;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form button .fa-solid {
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.form button:hover {
+    background-color: #1C262F;
+}
+.form form p{
+    padding-top: 10px;
+}
+.form form p a{
+    text-decoration: none;
+    opacity: 0.6;
+    font-size: 13px;
+    color: #1C262F;
+    transition: ease 0.3s;
+}
+.form form p a:hover{
+    opacity: 0.8;
+}
+
+.login-page .form-wrapper .copy {
+    width: 45%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.login-page .form-wrapper .copy p {
+    color: #F5841A;
+    opacity: 0.5;
+}
+.login-page .form-wrapper .copy p a{
+    color: #F5841A;
+    text-decoration: none;
+}
+
+
+.body-wrapper {
+    display: none;
+}
+
+/* navbar */
+.navbar-wrapper {
+    width: 100%;
+
+}
+
+.navbar .logo p span text {
+    font-size: 18px;
+}
+
+.navbar .links .wrapper .admin-info {
+    color: white;
+    margin: 0 20px 0 0;
+}
+
+.navbar .links .wrapper .admin-info p {
+    margin: 0;
+}
+
+.navbar .links .wrapper .admin-info .greet {
+    font-size: 10px;
+}
+
+.navbar .links .wrapper .admin-info .name {
+    font-size: 15px;
+    color: #F5841A;
+}
+
+/* add products */
+.add-wrapper {
+    width: 100%;
+}
+
+.add-wrapper p {
+    margin: 5px 0px 15px 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1C262F;
+    text-align: center;
+}
+
+.add-section {
+    height: 80px;
+    padding-top: 5px;
+    background-color: #1C262F;
+    width: 100%;
+    padding: 0 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-section form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.add-section form input,
+.add-section form select {
+    outline: none;
+    margin: 0 ;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333f4b;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+.add-section form input::placeholder,
+.add-section form select::placeholder {
+    color: #c1c1c1; 
+    font-size: 17px;
+}
+
+.add-section form button {
+    outline: none;
+    margin: 0 ;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-section form input {
+    flex: 1;
+    min-width: 150px;
+    height: 40px;
+}
+
+.add-section form select {
+    flex: 1;
+    min-width: 150px;
+    height: 40px;
+    appearance: none;
+    padding-right: 20px;
+    appearance: none;
+    padding-right: 30px; /* Space for the arrow */
+    background: #333f4b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="white" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 20px center;
+    background-size: 22px;
+}
+
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.add-section form button {
+    background-color: #F7931E;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    max-width: 400px;
+    font-weight: bold;
+    height: 40px;
+}
+
+.add-section form button:hover {
+    background-color: #D97700;
+}
+
+
+
+@media (max-width: 500px) {
+    .login-page .form-wrapper .copy {
+        width: 90%;
+    }
+    .add-section{
+        height: 200px;
+    }
+    .add-section form {
+        gap: 10px;
+        margin: 0;
+    }
+    .add-wrapper p{
+        margin: 5px 0 5px 0;
+    }
+    .add-section form button {
+        min-width: 372px;
+    }
+}
