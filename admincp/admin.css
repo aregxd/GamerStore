@@ -316,7 +316,6 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100vh;
 }
 
 
@@ -347,6 +346,7 @@
 }
 
 .crud-table tbody tr {
+    height: 40px;
     border-bottom: 1px solid #ddd;
 }
 

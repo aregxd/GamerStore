@@ -230,7 +230,43 @@
             </div>
 
             <!-- order page -->
-            <div class="order-wrapper">Order</div>
+            <div class="order-wrapper">
+                <table class="crud-table">
+                    <thead>
+                        <tr>
+                            <th>ODR ID </th>
+                            <th>ITEM</th>
+                            <th>UID</th>
+                            <th>STATUS</th>
+                            <th>VIEW</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <?php 
+                        if(isset($_SESSION['islogined'])){
+                            $sql = "SELECT * FROM orders ORDER BY odr_id DESC";
+                            $result=mysqli_query($conn,$sql);
+                        
+                            while($rows = $result->fetch_assoc()){
+                            
+                        ?>
+                        <tr>
+                            <td><?php echo $rows['odr_id']; ?></td>
+                            <td><?php echo $rows['item']; ?></td>
+                            <td><?php echo $rows['uid']; ?></td>
+                            <td><?php echo $rows['status']; ?></td>
+                            <form method="post">
+                                <td class="act-btns">
+                                <a href="../admincp/manage-order.php?id=<?php echo $rows['odr_id']; ?>&ln=<?php echo $_SESSION['islogined'] ? 'tr' : 'fl'; ?>" class="action-btn"><i class="fa-solid fa-expand"></i></a>  
+                                </td>
+                            </form>
+                        </tr>
+                        <?php } } ?>
+                        </tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 

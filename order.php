@@ -1,6 +1,8 @@
 <?php
 include 'php/connection.php';
 session_start();
+
+$pid = $_GET['pid'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,31 +58,35 @@ session_start();
     <div class="order-wrapper">
       <div class="order-container">
         <!-- card col -->
+         <?php
+          $fetch = "SELECT * FROM products WHERE `product_id`=$pid";
+          $fetchquery = mysqli_query($conn,$fetch);
+          while($row = $fetchquery -> fetch_assoc()){
+          ?>
         <div class="card-col">
           <div class="card">
-            <img src="Img/pubg.png" />
+            <img src="Img/<?php echo $row['card_img'] ?>" />
             <div class="details">
-              <p class="game"><i class="fa-solid fa-gamepad"></i>PUBG UC</p>
+              <p class="game"><i class="fa-solid fa-gamepad"></i><?php echo $row['item'] ?></p>
               <div class="uc-price">
                 <div class="uc">
-                  <img src="Img/uc.png" />
-                  <p>60</p>
+                  <img src="Img/<?php echo $row['cur_img'] ?>" />
+                  <p><?php echo $row['quantity'] ?></p>
                 </div>
                 <div class="price">
-                  <p>रु. <span>120</span></p>
+                  <p>रु. <span><?php echo $row['price'] ?><input type="hidden" class="price-per-item" value="<?php echo $row['price']?>"></span></p>
                 </div>
               </div>
             </div>
           </div>
+          
         </div>
         <!-- order col -->
         <div class="order-desc-col">
           <div class="order-desc-container">
             <div class="desc-area">
               <p class="title">PLACE AN ORDER</p>
-              <p class="detail"><span>Weekly membership of Garena Free Firee offers a total 450 diamonds out of which
-                  100 diamonds are instantly transferred to the account whereas 350 diamonds are allotted as daily
-                  check-in.</span></p>
+              <p class="detail"><span><?php echo $row['description'] ?></span></p>
               <p class="message">
                 QR CODE WILL APPEAR AFTER YOU SELECT PAYMENT MODE.
               </p>
@@ -89,31 +95,31 @@ session_start();
               <form method="POST">
                 <div class="input-area">
                   <p>Enter UID</p>
-                  <input class="input" type="text" name="" placeholder="Eg. 123456789" required autocomplete="off" />
+                  <input class="input" type="text" name="uid" placeholder="Eg. 123456789" required autocomplete="off" />
                 </div>
                 <div class="input-area">
                   <p>Enter Ingame Name</p>
-                  <input class="input" type="text" name="" placeholder="Eg. BlackxDevil" required autocomplete="off" />
+                  <input class="input" type="text" name="ig-name" placeholder="Eg. BlackxDevil" required autocomplete="off" />
                 </div>
                 <div class="input-area">
                   <p>Enter Your Email</p>
-                  <input class="input" type="email" name="" placeholder="Email" required autocomplete="off" />
+                  <input class="input" type="email" name="email" placeholder="Email" required autocomplete="off" />
                 </div>
                 <div class="input-area">
                   <p>Quantity</p>
                   <div class="number-input">
-                    <div class="decrement">-</div>
-                    <input type="number" id="number" value="1" />
+                    <div class="decrement" >-</div>
+                    <input type="number" id="number" name="quantity" value="1" />
                     <div class="increment">+</div>
                   </div>
                 </div>
                 <div class="input-area">
                   <p>Enter Transaction Code</p>
-                  <input class="input" type="text" name="" placeholder="Eg. 0MFD0VS" required autocomplete="off" />
+                  <input class="input" type="text" name="tra-code" placeholder="Eg. 0MFD0VS" required autocomplete="off" />
                 </div>
                 <div class="input-area">
                   <p>Enter Transaction Time</p>
-                  <input class="time" type="datetime-local" name="" />
+                  <input class="time" type="datetime-local" required name="tra-time" />
                 </div>
                 <div class="payment-container">
                   <p>Select Payment Mode:</p>
@@ -122,7 +128,7 @@ session_start();
                     <img src="Img/payment/esewa.png" />
                   </label>
                   <label class="khalti-radio">
-                    <input type="radio" name="image-radio" value="KHALTI" />
+                    <input type="radio" name="image-radio" required value="KHALTI" />
                     <img src="Img/payment/khalti.png" />
                   </label>
                   <label class="ime-radio">
@@ -132,12 +138,13 @@ session_start();
                 </div>
                 <div class="line"></div>
                 <div class="total">
-                  <p>NET PAYABLE AMOUNT :</p>
-                  <p><span style="color:#1C262F">रु. </span>340</p>
+                    <p>NET PAYABLE AMOUNT :</p>
+                    <p><span style="color:#1C262F">रु.</span> <span class="final-price"></span> </p>
                 </div>
                 <div class="confirm">
-                  <button type="submit"> Confirm Order</button>
+                  <button type="submit" name='order-btn'> Confirm Order</button>
                 </div>
+                <?php } ?>
               </form>
               <div class="disclaimer">
                 *Once order is confirmed you cannot edit it later , check your details twice before confirming order.
@@ -145,9 +152,63 @@ session_start();
               <div class="disclaimer">
                 *The email you provided will be used to contact you in case of any misfilled, you will not be refunded if you are not reachable through that email.
               </div>
+              <div class="disclaimer">
+                *Please contact us on our social handles if you have any queries regarding your order.
+              </div>
             </div>
           </div>
         </div>
+        <?php 
+          if(isset($_POST['order-btn'])){
+            $uid = $_POST['uid'];
+            $ig_name = $_POST['ig-name'];
+            $email = $_POST['email'];
+            $tra_code = $_POST['tra-code'];
+            $tra_time = $_POST['tra-time'];
+            $payment_mode ;
+            if (isset($_POST['image-radio'])) {
+              $payment_mode = $_POST['image-radio'];
+            }
+            if($_GET['pid']){
+              $pid = $_GET['pid'];
+              $fetch = "SELECT * FROM products WHERE `product_id`=$pid";
+              $fetchquery = mysqli_query($conn,$fetch);
+              while($row = $fetchquery -> fetch_assoc()){
+                $game;
+                switch($row["card_img"]){
+                  case 'pubg.png':
+                    $game="PUBG";
+                    break;
+                  case 'freefire.png':
+                    $game="FF";
+                    break;
+                  case 'coc.png':
+                    $game="COC";
+                    break;
+                }
+                $item = $row['item'];
+                $amount = $row['quantity'];
+                $price = $row['price'];
+                $_SESSION['price'] = $price;
+              }
+            }
+            $quantity;
+            $final_price;
+            if (isset($_POST['quantity'])) {
+              $quantity = $_POST['quantity'];
+              $final_price = $price * $quantity;
+            }
+          
+
+          $insert = "INSERT INTO `orders` (`game`, `item`, `amount`,`price`,`uid`,`ig_name`,`email`,`quantity`,`total_price`,`payment-mode`,`tra_code`,`tra_time`) VALUES ( '$game', '$item' ,'$amount', '$price','$uid','$ig_name','$email','$quantity','$final_price','$payment_mode','$tra_code','$tra_time')";
+          $insert_query = mysqli_query($conn,$insert);
+          if($insert_query){
+            echo "<script>alert('YOUR ORDER IS PLACED SUCCESSFULLY. PLEASE WAIT PATIENTLY UNTIL YOU GET YOUR ORDER COMPLETED.');</script>";
+          }else{
+            echo "<script>alert('YOUR ORDER CANNOT BE PLACED. PLEASE TRY AGAIN.');</script>";
+          }
+        }?>
+
         <!-- qr col -->
         <div class="qr-code">
           <div class="esewa">
@@ -245,13 +306,24 @@ session_start();
       const numberInput = document.getElementById("number");
       const incrementButton = document.querySelector(".increment");
       const decrementButton = document.querySelector(".decrement");
+      const pricePerItem = document.querySelector(".price-per-item").value;
+      let finalPrice = document.querySelector(".final-price");
+      finalPrice.innerText=pricePerItem;
+
 
       incrementButton.addEventListener("click", () => {
         numberInput.value = parseInt(numberInput.value) + 1;
+        let quantity = numberInput.value;
+        let totalPrice =pricePerItem * quantity;
+        finalPrice.innerText=totalPrice;
       });
 
       decrementButton.addEventListener("click", () => {
-        numberInput.value = Math.max(0, parseInt(numberInput.value) - 1);
+        numberInput.value = Math.max(1, parseInt(numberInput.value) - 1);
+        let quantity = numberInput.value;
+        let totalPrice =pricePerItem * quantity;
+        finalPrice.innerText=totalPrice;
+        
       });
     });
 
