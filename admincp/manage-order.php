@@ -3,7 +3,7 @@ include '../php/connection.php';
 session_start();
 $ln = 'fl';
 $ln = $_GET['ln'];
-// if (isset($_SESSION['islogined'])&& $ln=="tr") {
+if (isset($_SESSION['islogined'])&& $ln=="tr") {
 
 ?>
 <!doctype html>
@@ -99,7 +99,7 @@ $ln = $_GET['ln'];
                 <div class="record">PRICE : <?php echo $price ?></div>
                 <div class="record">QUANTITY : <?php echo $quantity ?></div>
                 <div class="record">UID : <?php echo $uid ?></div>
-                <div class="record">IG NAME : <?php echo $ig_name ?></div>
+                <div class="record">IN GAME NAME : <?php echo $ig_name ?></div>
                 <div class="record">EMAIL : <?php echo $email ?></div>
                 <div class="record">PAYMENT MODE : <?php echo $payment_mode ?></div>
                 <div class="record">TOTAL PRICE : <?php echo $total_price ?></div>
@@ -110,7 +110,6 @@ $ln = $_GET['ln'];
 
             </div>
             <hr>
-            <p>Action</p>
             <div class="form-wrapper">
                 <div class="form-section">
                     <form method="post">
@@ -157,13 +156,13 @@ $ln = $_GET['ln'];
     if (isset($_POST['back-btn'])) {
         echo '<script>window.location.href = "../admincp/";</script>';
     }
-    // }
-    //  else{
-    //     echo '<script>
-    //      alert("Please login first to access this page.... \nRedirecting you to admin panel.") ;
-    //      window.location.href = "../admincp/";
-    //     </script>';
-    //  }
+    }
+     else{
+        echo '<script>
+         alert("Please login first to access this page.... \nRedirecting you to admin panel.") ;
+         window.location.href = "../admincp/";
+        </script>';
+     }
     
 
     ?>
@@ -244,6 +243,7 @@ $ln = $_GET['ln'];
         }
 
         .form-wrapper .form-section form {
+        margin-top: 10px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -285,7 +285,7 @@ $ln = $_GET['ln'];
             height: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 10px;
+            margin: 10px 0;
 
         }
 

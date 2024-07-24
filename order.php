@@ -34,7 +34,63 @@ $pid = $_GET['pid'];
     </div>
     <div class="info">
       <div class="info-area">
-        aprimregmi
+          <div class="title" >
+            <h1>How to Order</h1>
+        </div>
+        <main>
+            <section id="step1">
+                <h2>Step 1: Enter User ID</h2>
+                <p>Provide your User ID. You can find your User ID in the profile section of the game.</p>
+            </section>
+            <section id="step2">
+                <h2>Step 2: Enter In-Game Name</h2>
+                <p>Enter your in-game name.</p>
+            </section>
+            <section id="step3">
+                <h2>Step 3: Enter Email</h2>
+                <p>Provide your email address. This email will be used to contact you if there are any errors with your inputs.</p>
+            </section>
+            <section id="step4">
+                <h2>Step 4: Select Quantity</h2>
+                <p>Choose the quantity of items you wish to purchase.</p>
+            </section>
+            <section id="step5">
+                <h2>Step 5: Select Payment Method</h2>
+                <p>You can pay via eSewa or khalti or IME Pay.</p>
+                <div id="paymentMethods">
+                    <img src="Img/payment/esewa.png" class="payment">
+                    <img src="Img/payment/khalti.png" class="payment">
+                    <img src="Img/payment/ime-pay.png" class="payment">
+                </div>
+                <p>After selecting your payment method, a QR code will appear. <br> Enter your in-game name in the remarks while making the payment.</p>
+            </section>
+            <section id="step6">
+                <h2>Step 6: Enter Transaction Code</h2>
+                <p>Enter the transaction code you received after payment.</p>
+                <div class="images">
+                  <img src="Img/info/transaction-esewa.png" >
+                  <img src="Img/info/transaction-khalti.png" >
+                  <img src="Img/info/transaction-ime.png" >
+                </div>
+            </section>
+            <section id="step7">
+                <h2>Step 7: Enter Transaction Time</h2>
+                <p>Enter the time of your transaction.</p>
+                <div class="images">
+                  <img src="Img/info/time-esewa.png" >
+                  <img src="Img/info/time-khalti.png" >
+                  <img src="Img/info/time-ime.png" >
+                </div>
+            </section>
+            <section id="step8">
+                <h2>Step 8: Double Check Details</h2>
+                <p>Review all the details you have filled out. Ensure everything is correct and then proceed to click 'Buy Now' to complete your purchase.</p>
+            </section>
+        </main>
+        <div class="footer">
+            <p>&copy; 2024 @ GamerStore</p>
+            <p>Developed with <i class="fa-solid fa-heart"></i> by <a href="https://www.aprimregmi.com.np/index.html" target="_blank">aprimr</a>.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -147,6 +203,9 @@ $pid = $_GET['pid'];
                 <?php } ?>
               </form>
               <div class="disclaimer">
+                *Enter your in game name in remarks while doing payment.
+              </div>
+              <div class="disclaimer">
                 *Once order is confirmed you cannot edit it later , check your details twice before confirming order.
               </div>
               <div class="disclaimer">
@@ -203,7 +262,10 @@ $pid = $_GET['pid'];
           $insert = "INSERT INTO `orders` (`game`, `item`, `amount`,`price`,`uid`,`ig_name`,`email`,`quantity`,`total_price`,`payment-mode`,`tra_code`,`tra_time`) VALUES ( '$game', '$item' ,'$amount', '$price','$uid','$ig_name','$email','$quantity','$final_price','$payment_mode','$tra_code','$tra_time')";
           $insert_query = mysqli_query($conn,$insert);
           if($insert_query){
-            echo "<script>alert('YOUR ORDER IS PLACED SUCCESSFULLY. PLEASE WAIT PATIENTLY UNTIL YOU GET YOUR ORDER COMPLETED.');</script>";
+            echo "<script>
+            alert('YOUR ORDER IS PLACED SUCCESSFULLY. PLEASE WAIT PATIENTLY UNTIL YOU GET YOUR ORDER COMPLETED.');
+            window.location.href = '../gamerstore/';
+            </script>";
           }else{
             echo "<script>alert('YOUR ORDER CANNOT BE PLACED. PLEASE TRY AGAIN.');</script>";
           }
