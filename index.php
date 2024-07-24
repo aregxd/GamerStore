@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body>
+
     
     <!-- navbar -->
     <div class="navbar">
@@ -150,19 +150,25 @@
     <div class="product-list">
         <div class="product-item">
             <div class="container">
- <!-- PUBG -->
-            <?php 
-            $select = "SELECT * FROM products";
-            $select_query = mysqli_query($conn, $select);
+                <?php 
+                $select = "SELECT * FROM products";
+                $select_query = mysqli_query($conn, $select);
+                $empty;
 
-            while ($row = $select_query->fetch_assoc()) {
-                $item = $row['item'];
-                $amount = $row['quantity'];
-                $price = $row['price'];
-                $card_img = $row['card_img'];
-                $cur_img = $row['cur_img'];
-            
-            ?>
+                if (mysqli_num_rows($select_query) > 0) {//check if table is empty 
+                    $empty = false;
+                } else {
+                    $empty = true;
+                }
+
+                while ($row = $select_query->fetch_assoc()) {
+                    $pid = $row["product_id"];
+                    $item = $row['item'];
+                    $amount = $row['quantity'];
+                    $price = $row['price'];
+                    $card_img = $row['card_img'];
+                    $cur_img = $row['cur_img'];
+                ?>
                 <div class="card">
                     <img src="Img/<?php echo$card_img; ?>">
                     <div class="details">
@@ -177,11 +183,26 @@
                             </div>
                         </div>
                     </div>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</button>
+                    <a href="order.php?pid=<?php echo $pid; ?>" class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>BUY NOW</a>
                 </div>
-            <?php } ?>
-                
+                <?php } ?>
             </div>
+            <p class="khali-xa">खली रैछ त यार ... </p>
+            <p class="yeti-ho">यति हो ... </p>
+            <?php 
+            if($empty){//display when empty and end of page
+                echo "<script>
+                    document.querySelector('.khali-xa').style.display='flex';
+                    document.querySelector('.yeti-ho').style.display='none';
+                </script>";
+            }
+            else{//display when end of page
+                echo "<script>
+                    document.querySelector('.khali-xa').style.display='none';
+                    document.querySelector('.yeti-ho').style.display='flex';
+                </script>";
+            }
+            ?>
         </div>
     </div>
 
@@ -200,7 +221,7 @@
             <div class="footer-column">
                 <div class="footer-content">
                     <h3>Contact Info</h3>
-                    <p><i class="fa-solid fa-envelope"></i> safalacharya2059@gmail.com</p>
+                    <p><i class="fa-solid fa-envelope"></i> gamerstore2081@gmail.com</p>
                     <p><i class="fa-solid fa-location-dot"></i> Bharatpur Chitwan, Nepal</p>
                     <p><i class="fa-solid fa-phone"></i> +977 970-4989205</p>
                 </div>
@@ -217,23 +238,22 @@
             </div>
         </div>
         <div class="social-links">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://shorturl.at/OWxF0" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://shorturl.at/UwpgR" target="_blank"><i class="fa-brands fa-instagram" target="_blank"></i></a>
+            <a href="https://shorturl.at/OHxI3" target="_blank"><i class="fa-brands fa-whatsapp" target="_blank"></i></a>
         </div>
         <div class="footer">
             <div class="footer-bottom">
                 <p>&copy; Gamer Store @ All rights reserved. </p>
             </div>
             <div class="footer-bottom">
-                <p>Made with  <i class="fa-solid fa-heart "></i>  by <a href="https://www.aprimregmi.com.np/index.html" target="_blank">aprimr.</a> </p>
+                <p>Developed with  <i class="fa-solid fa-heart "></i>  by <a href="https://www.aprimregmi.com.np/index.html" target="_blank">aprimr</a>. </p>
             </div>
         </div>
 
     </footer>
 
-
-
+    
 
 <script src="script.js"></script>
 </body>

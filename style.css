@@ -133,6 +133,14 @@
     width: 80%;
     margin: 20px;
 }
+.product-list .product-item .yeti-ho ,.khali-xa{
+    display: none;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    margin-top: 20px;
+    opacity: 0.6;
+}
 .product-list .product-item .container{
     display: flex;
     justify-content: center;
@@ -195,15 +203,20 @@
 .product-list .product-item .container .card .details .uc-price .price p span{
     color: #F5841A;
 }
-.product-list .product-item .container .card button{
+.product-list .product-item .container .card .add-to-cart{
+    cursor: pointer;
     height: 50px;
     background-color: #F5841A;
+   text-decoration: none;
     border: none;
     color: white;
     font-size: 15px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.product-list .product-item .container .card button i{
+.product-list .product-item .container .card .add-to-cart i{
     margin: 0 5px 0 0;
 }
 

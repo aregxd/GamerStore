@@ -1,14 +1,16 @@
+//text on card changes
 let addToCart = document.querySelectorAll(".add-to-cart");
 addToCart.forEach( btn =>{
 
     btn.addEventListener('click',()=>{
-        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Item added to cart`;
+        btn.innerHTML = `<i class="fa-regular fa-hourglass-half fa-spin"></i> Processing order.`;
         setTimeout(()=>{
-            console.log
-            btn.innerHTML = `<i class="fa-solid fa-cart-plus"></i>Add to cart`;
+            btn.innerHTML = `<i class="fa-solid fa-cart-plus"></i>BUY NOW`;
         },4000);
     });
 
 });
+
+
 
 

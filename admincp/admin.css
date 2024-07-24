@@ -263,7 +263,136 @@
     background-color: #D97700;
 }
 
+/* filter toggle */
+.filter-wrapper{
+    margin-top: 10px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter-wrapper .filter-bar{
+    display: flex;
+    align-items: center;
+    padding:0px 15px;
+    height: 100%;
+    gap: 10px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 10px #5e5f60;
+}
 
+.filter-wrapper .filter-bar div{
+    display: flex;
+    cursor: pointer;
+    height: 40px;
+    padding: 5px 25px;
+    color: black;
+    font-size: 20px;
+    border-radius: 5px;
+}
+.filter-wrapper .filter-bar div:hover{
+    background-color: #e5e5e5;
+}
+.filter-wrapper .filter-bar .active{
+    background-color: #F7931E;
+    color: white;
+}
+.filter-wrapper .filter-bar .active:hover{
+    background-color: #F7931E
+}
+/* admin-area */
+.admin-area{
+    margin: 30px 0px;
+}
+/* product page */
+.admin-area .product-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+/* order page */
+.admin-area .order-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+
+/* table */
+.crud-table {
+    margin: 0 15px 30px 15px;
+    border-collapse: collapse;
+    font-size: 22px;
+    min-width: 390px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.crud-table thead {
+    background-color: #1e4b67;
+    color: white;
+    text-align: left;
+}
+
+.crud-table th,
+.crud-table td {
+    padding: 12px 15px;
+}
+.crud-table th:last-child,.crud-table td:last-child{
+    padding-right: 0;
+    padding: 0;
+}
+
+.crud-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.crud-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    color: #133f5a;
+}
+
+.crud-table tbody tr:last-of-type {
+    border-bottom: 2px solid #1B4965;
+}
+
+.crud-table tbody tr td .action-btn i {
+    color: #133f5a;
+    cursor: pointer;
+}
+
+.crud-table tbody tr td .action-btn i:hover {
+    color: #0266a1;
+}
+
+.crud-table tbody tr td .del i {
+    color: #ff6b6b;
+    cursor: pointer;
+}
+
+.crud-table tbody tr td .del i:hover {
+    color: #e83939;
+}
+
+.crud-table tbody tr td .action-btn {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn i {
+    font-size: 23px;
+}
 
 @media (max-width: 500px) {
     .login-page .form-wrapper .copy {
@@ -282,4 +411,28 @@
     .add-section form button {
         min-width: 372px;
     }
+    .crud-table{
+        font-size: 10px;
+    }
+    .admin-area{
+        margin: 20px 7px ;
+    }
+    .action-btn{
+        margin: 0;
+        margin-right: 3px;
+    }
+    .action-btn i {
+        font-size: 15px;
+    }
+    .crud-table tbody tr .act-btns{
+        display: flex;
+        align-items: center;
+    }
+    .crud-table{
+        border-radius: 4px 4px 0 0;
+    }
+    .crud-table td:last-child{
+        padding-top: 18px;
+    }
+    
 }

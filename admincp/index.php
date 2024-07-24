@@ -1,10 +1,11 @@
 
 <?php 
-    include '../php/connection.php';
-
+    include '../php/connection.php';     
+    
     session_start();
     $_SESSION['islogined']=false;
 
+    //login page
     if(isset($_POST['login-btn'])){
         $username=$_POST['username'];
         $password=$_POST['password'];
@@ -23,7 +24,6 @@
                         alert(`Incorrect admin password. Redirecting to home page...`)
                         window.location.href = "../";
                     </script>';
-                    header('Location: ../');
                 }
             }else{
                 echo'<script>
@@ -34,6 +34,8 @@
         }
     }
 
+
+    // add products
     if (isset($_POST['add-btn']) && isset($_SESSION['islogined'])){
         $item = $_POST['item'];
         $amount = $_POST['amount'];
@@ -61,9 +63,9 @@
             $insert = "INSERT INTO `products` ( `item`, `quantity`, `price`, `card_img`, `cur_img`) VALUES ( '$item', '$amount', '$price', '$card_img', '$cur_img')";
             $insert_query  = mysqli_query($conn,$insert);
         }
-        
-        
-    }
+    }   
+
+    
     
 ?>
 
@@ -161,8 +163,77 @@
                 </form>
             </div>
         </div>
+  
+    <!-- filter bar -->
+        <div class="filter-wrapper">
+             <div class="filter-bar">
+                    <div class=" btn-product active">Product</div>
+                    <div class=" btn-order ">Orders</div>
+             </div>
+        </div>
 
-    </div>
+    <!-- admin area -->
+        <div class="admin-area">
+            <!-- product page -->
+            <div class="product-wrapper">
+                <table class="crud-table">
+                    <thead>
+                        <tr>
+                            <th>ID </th>
+                            <th>ITEM</th>
+                            <th>AMOUNT</th>
+                            <th>PRICE</th>
+                            <!-- <th>GAME</th> -->
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <?php 
+                        if(isset($_SESSION['islogined'])){
+                            $sql= "SELECT * FROM products";
+                            $result=mysqli_query($conn,$sql);
+                        
+                            while($rows = $result->fetch_assoc()){
+                                $game;
+                                if($rows["card_img"] == "pubg.png"){
+                                    $game="PUBG";
+                                }
+                                elseif($rows["card_img"] == "freefire.png"){
+                                    $game="FF";
+                                }
+                                elseif($rows["card_img"] == "coc.png"){
+                                    $game="COC";
+                                }
+                                else{
+                                    $game= "ERROR! Check database.";
+                                }
+                            
+                        ?>
+                        <tr>
+                            <td><?php echo $rows['product_id']; ?></td>
+                            <td><?php echo $rows['item']; ?></td>
+                            <td><?php echo $rows['quantity']; ?></td>
+                            <td><?php echo $rows['price']; ?></td>
+                            <!-- <td><?php echo $game; ?></td> -->
+                            <form method="post">
+                                <td class="act-btns">
+                                    <a href="../admincp/edit.php?id=<?php echo $rows['product_id']; ?>&ln=<?php echo $_SESSION['islogined'] ? 'tr' : 'fl'; ?>" class="action-btn"><i class="fa fa-pencil"></i></a>
+                                    <a href="../php/delete.php?id=<?php echo $rows['product_id'] ?>" class="action-btn del"><i class="fa-regular fa-trash-can"></i></a>
+                                </td>
+                            </form>
+                        </tr>
+                        <?php } } ?>
+                        </tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- order page -->
+            <div class="order-wrapper">Order</div>
+        </div>
+
+
     
 
 
@@ -185,5 +256,6 @@
         });
     </script>
 
+<script src="admin.js"></script>
 </body>
 </html>
