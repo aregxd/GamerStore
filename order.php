@@ -115,7 +115,7 @@ $pid = $_GET['pid'];
       </div>
       <div class="links">
         <div class="wrapper">
-          <a href="index.php"><i class="fa-solid fa-angle-left"></i></a>
+          <a href="../"><i class="fa-solid fa-angle-left"></i></a>
           <a class="info-btn"><i class="fa-solid fa-circle-info"></i></a>
         </div>
       </div>
