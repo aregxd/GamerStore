@@ -2,6 +2,17 @@
 include 'php/connection.php';
 session_start();
 
+//php mailer imports
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'mail/Exception.php';
+require 'mail/PHPMailer.php';
+require 'mail/SMTP.php';
+// 
+
+
 $pid = $_GET['pid'];
 ?>
 <!DOCTYPE html>
@@ -104,7 +115,7 @@ $pid = $_GET['pid'];
       </div>
       <div class="links">
         <div class="wrapper">
-          <a href="../gamerstore/"><i class="fa-solid fa-angle-left"></i></a>
+          <a href="index.php"><i class="fa-solid fa-angle-left"></i></a>
           <a class="info-btn"><i class="fa-solid fa-circle-info"></i></a>
         </div>
       </div>
@@ -218,7 +229,10 @@ $pid = $_GET['pid'];
           </div>
         </div>
         <?php 
-          if(isset($_POST['order-btn'])){
+          if(isset($_POST['order-btn'])){ 
+
+            $mail = new PHPMailer(true);          //Php mailer
+
             $uid = $_POST['uid'];
             $ig_name = $_POST['ig-name'];
             $email = $_POST['email'];
@@ -262,14 +276,60 @@ $pid = $_GET['pid'];
           $insert = "INSERT INTO `orders` (`game`, `item`, `amount`,`price`,`uid`,`ig_name`,`email`,`quantity`,`total_price`,`payment-mode`,`tra_code`,`tra_time`) VALUES ( '$game', '$item' ,'$amount', '$price','$uid','$ig_name','$email','$quantity','$final_price','$payment_mode','$tra_code','$tra_time')";
           $insert_query = mysqli_query($conn,$insert);
           if($insert_query){
-            echo "<script>
-            alert('YOUR ORDER IS PLACED SUCCESSFULLY. PLEASE WAIT PATIENTLY UNTIL YOU GET YOUR ORDER COMPLETED.');
-            window.location.href = '../gamerstore/';
-            </script>";
-          }else{
-            echo "<script>alert('YOUR ORDER CANNOT BE PLACED. PLEASE TRY AGAIN.');</script>";
+            //send mail
+            try {
+              // Server settings
+              $mail->SMTPDebug = SMTP::DEBUG_SERVER;                     
+              $mail->isSMTP();                                           
+              $mail->Host       = 'smtp.gmail.com';                      
+              $mail->SMTPAuth   = true;                                 
+              $mail->Username   = 'aprimregmi24@gmail.com';             
+              $mail->Password   = 'txjs ktgd mvhv dfyy';                  
+              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        
+              $mail->Port       = 587;                                   
+
+              // Recipients
+              $mail->setFrom('aprimregmi24@gmail.com', 'Gamer Store WebApp');
+              $mail->addAddress('aprimregmi24@gmail.com');                
+
+              // Content
+              $mail->isHTML(true);                                        
+              $mail->Subject = 'Lwww, New order aayo hai!!';
+              $mail->Body    = '<h1>Details &rarr; </h1><br>
+                                <h3>Game: ' . $game . '</h3>
+                                <h3>Item: ' . $item . '</h3>
+                                <h3>Amount: ' . $amount . '</h3>
+                                <h3>Price: Rs.' . $price . '</h3>
+                                <h3>UID: ' . $uid . '</h3>
+                                <h3>IG Name: ' . $ig_name . '</h3>
+                                <h3>Email: ' . $email . '</h3>
+                                <h3>Quantity: ' . $quantity . '</h3>
+                                <h3>Total Price: Rs.' . $final_price . '</h3>
+                                <h3>Payment Mode: ' . $payment_mode . '</h3>
+
+                                ';
+
+              if ($mail->send()) {
+                  echo "<script>
+                  alert('YOUR ORDER REQUEST IS SUCCESSFULLY SENT. PLEASE WAIT PATIENTLY UNTIL YOU GET YOUR ORDER COMPLETED.');
+                  window.location.href = '../gamerstore/';
+                  </script>";
+                  exit();
+              } else {
+                  echo "<script>alert('YOUR ORDER CANNOT BE PLACED. PLEASE TRY AGAIN.');</script>";
+                  exit();
+              }
+
           }
-        }?>
+          catch (Exception $e) {
+            echo "Mail could not be sent to the admin. errorCode <br>{$mail->ErrorInfo}";
+          }
+        }  
+        else{
+          echo "<script>alert('YOUR ORDER CANNOT BE PLACED. PLEASE TRY AGAIN.');</script>";
+        }
+      }
+      ?>
 
         <!-- qr col -->
         <div class="qr-code">
